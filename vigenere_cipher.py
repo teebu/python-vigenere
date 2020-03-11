@@ -112,12 +112,7 @@ class Vigenere():
         return ' '.join([string[i:i + chunk_size] for i in range(0, chars, chunk_size)])
 
 
-def test(testasdf='adf'):
-    print(testasdf)
-
-
 def main():
-    test()
     message = 'SPEAK FRIEND AND ENTER'
     key = 'BAGGINS'
     vig = Vigenere(key, message)
