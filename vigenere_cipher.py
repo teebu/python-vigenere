@@ -6,17 +6,16 @@ from pprint import pprint
 
 class Vigenere():
     """Vigenere class"""
+
     def __init__(self, key, message=''):
         self._MATRIX = self._build_matrix()
         self.message = message
         self.key = key
 
-
     @property
     def key(self):
         """Get key."""
         return self.__key
-
 
     @key.setter
     def key(self, key):
@@ -24,18 +23,16 @@ class Vigenere():
         self.__key = "".join(key.upper().split())
         self.__filler_key = self._build_filler_key()
 
-
     @property
     def message(self):
         """Get message."""
         return self.__message
 
-
     @message.setter
     def message(self, message):
         """Set message, setting upper case and removing non alpha keys."""
-        self.__message = "".join((letter.upper() for letter in message if letter in string.ascii_letters))
-
+        self.__message = "".join(
+            (letter.upper() for letter in message if letter in string.ascii_letters))
 
     def _build_matrix(self):
         """Build the shifting alphabet matrix lookup table"""
@@ -61,7 +58,6 @@ class Vigenere():
         # print(matrix['C']['C'])
         return matrix
 
-
     def _build_filler_key(self):
         """Key has to be same length as message, if not, repeat key until it is"""
         filler_key = ''
@@ -74,13 +70,11 @@ class Vigenere():
             filler_key = filler_key[:len(self.__message)]
         return filler_key
 
-
     def _print_info(self):
         """Print info about the current data"""
         print(f"Message = {self.message}")
         print(f"Key = {self.key}")
-        print(f"Filler__key: {self.__filler_key}")
-
+        print(f"Filler key: {self.__filler_key}")
 
     def encrypt_message(self):
         """Encrypt message using key in the lookup matrix"""
@@ -94,7 +88,6 @@ class Vigenere():
             row = self.__filler_key[index]
             encrypted_message += self._MATRIX[col][row]
         return self._chunk_string(5, encrypted_message)
-
 
     def decrypt_message(self):
         """Decrypt message using key in the lookup matrix"""
@@ -113,14 +106,18 @@ class Vigenere():
                         break
         return plaintext
 
-
     def _chunk_string(self, size, string):
         """Break a string up into chunks of size"""
         chars, chunk_size = len(string), size
         return ' '.join([string[i:i + chunk_size] for i in range(0, chars, chunk_size)])
 
 
+def test(testasdf='adf'):
+    print(testasdf)
+
+
 def main():
+    test()
     message = 'SPEAK FRIEND AND ENTER'
     key = 'BAGGINS'
     vig = Vigenere(key, message)
